@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 function call_api(ticker) {
     return fetch('https://cloud.iexapis.com/stable/stock/' + ticker + '/quote?token=' + process.env.API_KEY)
     .then(response => response.json())
-    .then(json => json)
+    .catch(error => console.log(error))
 }
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
@@ -41,9 +41,16 @@ app.post('/', function (req, res) {
     ticker = req.body.stock_ticker;
     if (ticker) {
         call_api(ticker)
-        .then(response => res.render('home', {stock: response, ticker: ticker}))
+        .then(response => {
+            if (response) {
+                console.log(response);
+                res.render('home', {stock: response, ticker: ticker})
+            } else {
+                res.render('home');
+            }
+        })
     } else {
-        res.render('home')
+        res.render('home');
     }
 });
 // set static folder
