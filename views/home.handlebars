@@ -1,4 +1,5 @@
 <div class="jumbotron">
+    {{#if ticker}}
     <h1>{{{stock.companyName}}} {{{stock.symbol}}}</h1>
     <br>
     <strong>Latest Price: </strong>${{{stock.latestPrice}}} <br>
@@ -7,9 +8,9 @@
     <strong>Market Cap </strong>${{{stock.marketCap}}}<br>
     <strong>52 Week High: </strong>{{{stock.week52High}}}<br>
     <strong>52 Week Low: </strong>{{{stock.week52Low}}}<br></p>
+    {{else}}
+    <h1 class="display-4">Welcome to Stock Portfolio</h1>
+    <p class="lead">Lookup your ticker symbol above</p>    
+    {{/if}}
 </div>
 <br>
-
-{{#each stock}}
-    {{@key}} | {{this}} <br>
-{{/each}}

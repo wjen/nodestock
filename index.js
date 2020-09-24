@@ -29,9 +29,10 @@ app.set('view engine', 'handlebars');
 
 // Set handlebar index GET routes
 app.get('/', function (req, res) {
-    call_api(function (doneAPI) {
-        res.render('home', {stock: doneAPI});
-    }, 'fb');
+    res.render('home')
+    // call_api(function (doneAPI) {
+    //     res.render('home', {stock: doneAPI});
+    // });
 });
 // Set handlebar index POST routes
 app.post('/', function (req, res) {
